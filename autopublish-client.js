@@ -1,15 +1,15 @@
 // Hook in to constellation UI
 
-var Constellation = Package["babrahams:constellation"];
+var Constellation = Package["babrahams:constellation"].API;
 	
-Constellation.API.addTab({
+Constellation.addTab({
   name: 'Autopublish',
   headerContentTemplate: 'Constellation_autopublish',
   noOpen:true,
   onClick: "toggleAutopublish"
 });
 
-Constellation.API.registerCallbacks({
+Constellation.registerCallbacks({
   toggleAutopublish : function () {
 	Session.set('Constellation_autopublish', !Session.get('Constellation_autopublish'));
   }
