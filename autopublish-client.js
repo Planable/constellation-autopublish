@@ -11,20 +11,21 @@ Constellation.addTab({
 
 Constellation.registerCallbacks({
   toggleAutopublish : function () {
-    Session.set('Constellation_autopublish', !Session.get('Constellation_autopublish'));
+    AutopublishDict.set('Constellation_autopublish', !AutopublishDict.get('Constellation_autopublish'));
   }
 });
 
+var AutopublishDict = new ReactiveDict('constellation-autopublish');
+
 Tracker.autorun(function () {
-  if (Session.get('Constellation_autopublish')) {
-    var Contellation_config = Session.get("Constellation");
+  if (AutopublishDict.get('Constellation_autopublish')) {
     Meteor.subscribe('Constellation_autopublish', Package["constellation:console"].Constellation.ConstellationDict.get('Constellation').collections); 
   }
 });
 
 Template.Constellation_autopublish.helpers({
   autopublish: function () {
-    return Session.get('Constellation_autopublish');  
+    return AutopublishDict.get('Constellation_autopublish');  
   }
 });
 	

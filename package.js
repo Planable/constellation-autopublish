@@ -10,7 +10,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1');
 
-  api.use(['templating','session','tracker'], 'client');
+  api.use(['templating','reactive-dict','tracker'], 'client');
   api.use(['underscore'], 'server');
   api.use('constellation:console@1.0.0', 'client');
   api.use('dburles:mongo-collection-instances@0.3.3', 'server');
