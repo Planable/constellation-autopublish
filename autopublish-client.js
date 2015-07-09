@@ -1,6 +1,6 @@
 // Hook in to constellation UI
 
-var Constellation = Package["babrahams:constellation"].API;
+var Constellation = Package["constellation:console"].API;
     
 Constellation.addTab({
   name: 'Autopublish',
@@ -18,7 +18,7 @@ Constellation.registerCallbacks({
 Tracker.autorun(function () {
   if (Session.get('Constellation_autopublish')) {
     var Contellation_config = Session.get("Constellation");
-    Meteor.subscribe('Constellation_autopublish', Package["babrahams:constellation"].Constellation.ConstellationDict.get('Constellation').collections); 
+    Meteor.subscribe('Constellation_autopublish', Package["constellation:console"].Constellation.ConstellationDict.get('Constellation').collections); 
   }
 });
 
