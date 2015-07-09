@@ -18,7 +18,7 @@ Constellation.registerCallbacks({
 Tracker.autorun(function () {
   if (Session.get('Constellation_autopublish')) {
     var Contellation_config = Session.get("Constellation");
-    Meteor.subscribe('Constellation_autopublish', Contellation_config.collections); 
+    Meteor.subscribe('Constellation_autopublish', Package["babrahams:constellation"].Constellation.ConstellationDict.get('Constellation').collections); 
   }
 });
 
