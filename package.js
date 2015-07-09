@@ -15,7 +15,6 @@ Package.onUse(function(api) {
   api.use('babrahams:constellation@1.0.0', 'client');
   api.use('dburles:mongo-collection-instances@0.3.3', 'server');
 
-  api.addFiles('autopublish.css','client');
   api.addFiles('autopublish.html','client');
   api.addFiles('autopublish-client.js','client');
   api.addFiles('autopublish-server.js','server');
