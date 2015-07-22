@@ -13,7 +13,7 @@ Package.onUse(function(api) {
   api.use(['templating','reactive-dict','tracker'], 'client');
   api.use(['underscore'], 'server');
   api.use('constellation:console@1.1.7', 'client');
-  api.use('dburles:mongo-collection-instances@0.3.3', 'server');
+  api.use('dburles:mongo-collection-instances@0.3.4', 'server');
 
   api.addFiles('autopublish.html','client');
   api.addFiles('autopublish-client.js','client');
