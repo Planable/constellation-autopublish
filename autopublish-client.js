@@ -12,6 +12,14 @@ Constellation.addTab({
 Constellation.registerCallbacks({
   toggleAutopublish : function () {
     AutopublishDict.set('Constellation_autopublish', !AutopublishDict.get('Constellation_autopublish'));
+    // If we're switching off autopublish, we need to reset the current collection index number to 0
+    if (!AutopublishDict.get('Constellation_autopublish')) {
+      var currentTab = Constellation.getCurrentTab();
+       if (currentTab && currentTab.type === 'collection') {
+        var C = Package["constellation:console"].Constellation;
+        C.ConstellationDict.set(C.sessKey(currentTab.id), 0);
+      }
+    }
   }
 });
 
