@@ -1,7 +1,7 @@
 // Hook in to constellation UI
 
 var Constellation = Package["constellation:console"].API;
-    
+
 Constellation.addTab({
   name: 'Autopublish',
   headerContentTemplate: 'Constellation_autopublish',
