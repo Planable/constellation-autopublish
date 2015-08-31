@@ -26,8 +26,12 @@ Constellation.registerCallbacks({
 var AutopublishDict = new ReactiveDict('constellation-autopublish');
 
 Tracker.autorun(function () {
+  var TabStates = Package["constellation:console"].Constellation.TabStates;
+  var collections = Package["constellation:console"].Constellation.ConstellationDict.get('Constellation').collections;
   if (AutopublishDict.get('Constellation_autopublish')) {
-    Meteor.subscribe('Constellation_autopublish', Package["constellation:console"].Constellation.ConstellationDict.get('Constellation').collections); 
+    Meteor.subscribe('Constellation_autopublish', _.filter(collections, function (collection) {
+	  return TabStates.get(collection);
+	})); 
   }
 });
 
