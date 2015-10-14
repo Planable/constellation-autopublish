@@ -11,9 +11,11 @@ Constellation.addTab({
 
 Constellation.registerCallbacks({
   toggleAutopublish : function () {
-    AutopublishDict.set('Constellation_autopublish', !AutopublishDict.get('Constellation_autopublish'));
+	var ConstellationDict = Package["constellation:console"].Constellation.ConstellationDict;
+	var autoPublishAll = ConstellationDict.get('Constellation_autopublish_all');
+	ConstellationDict.set('Constellation_autopublish_all', !autoPublishAll);
     // If we're switching off autopublish, we need to reset the current collection index number to 0
-    if (!AutopublishDict.get('Constellation_autopublish')) {
+    if (!ConstellationDict.get('Constellation_autopublish_all')) {
       var currentTab = Constellation.getCurrentTab();
        if (currentTab && currentTab.type === 'collection') {
         var C = Package["constellation:console"].Constellation;
@@ -23,13 +25,20 @@ Constellation.registerCallbacks({
   }
 });
 
-var AutopublishDict = new ReactiveDict('constellation-autopublish');
+var autoPublishAll = function () {
+  var ConstellationDict = Package["constellation:console"].Constellation.ConstellationDict;
+  return ConstellationDict.get('Constellation_autopublish_all');
+}
 
 Tracker.autorun(function () {
   var TabStates = Package["constellation:console"].Constellation.TabStates;
   var ConstellationDict = Package["constellation:console"].Constellation.ConstellationDict;
-  if (AutopublishDict.get('Constellation_autopublish')) {
-    Meteor.subscribe('Constellation_autopublish', _.filter(ConstellationDict && ConstellationDict.get('Constellation').collections || [], function (collection) {
+  var ConstellationAutopublished = ConstellationDict.get('Constellation_autopublished') || [];
+  var ConstellationNotAutopublished = ConstellationDict.get('Constellation_not_autopublished') || [];
+  if (autoPublishAll() || (ConstellationAutopublished && ConstellationAutopublished.length)) {
+	var allCollections = ConstellationDict && ConstellationDict.get('Constellation').collections && _.difference(ConstellationDict.get('Constellation').collections, ConstellationNotAutopublished) || [];
+	var collections = (autoPublishAll()) ? allCollections : ConstellationAutopublished;
+    Meteor.subscribe('Constellation_autopublish', _.filter(collections, function (collection) {
 	  return TabStates.get(collection);
 	})); 
   }
@@ -37,7 +46,7 @@ Tracker.autorun(function () {
 
 Template.Constellation_autopublish.helpers({
   autopublish: function () {
-    return AutopublishDict.get('Constellation_autopublish');  
+    return autoPublishAll();  
   }
 });
 	
