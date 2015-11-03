@@ -39,7 +39,7 @@ Tracker.autorun(function () {
 	var allCollections = ConstellationDict && ConstellationDict.get('Constellation').collections && _.difference(ConstellationDict.get('Constellation').collections, ConstellationNotAutopublished) || [];
 	var collections = (autoPublishAll()) ? allCollections : ConstellationAutopublished;
     Meteor.subscribe('Constellation_autopublish', _.filter(collections, function (collection) {
-	  return TabStates.get(collection);
+	  return TabStates.get(collection) && !Package["constellation:console"].Constellation.collectionIsLocal(collection);
 	})); 
   }
 });
