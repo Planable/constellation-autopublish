@@ -8,12 +8,12 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.1');
+  api.versionsFrom('1.0');
 
   api.use(['templating','tracker'], 'client');
   api.use('check','server');
   api.use('underscore');
-  api.use('constellation:console@1.2.3', 'client');
+  api.use('constellation:console@1.3.0', 'client');
   api.use('dburles:mongo-collection-instances@0.3.4', 'server');
 
   api.addFiles('autopublish.html','client');
