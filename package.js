@@ -1,6 +1,6 @@
 Package.describe({
   name: 'constellation:autopublish',
-  version: '0.3.7',
+  version: '0.3.8',
   summary: 'Autopublish toggle plugin for Constellation',
   git: 'https://github.com/JackAdams/constellation-autopublish.git',
   documentation: 'README.md',
