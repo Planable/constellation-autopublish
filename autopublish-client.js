@@ -6,6 +6,7 @@ var API = Package["constellation:console"].API
 API.addTab({
   name: 'Autopublish',
   headerContentTemplate: 'Constellation_autopublish',
+  guideContentTemplate: 'Constellation_autopublish_guide',
   noOpen:true,
   onClick: "toggleAutopublish"
 });
@@ -39,9 +40,17 @@ Tracker.autorun(function () {
   if (autoPublishAll() || (ConstellationAutopublished && ConstellationAutopublished.length)) {
 	var allCollections = ConstellationDict && ConstellationDict.get('Constellation').collections && _.difference(ConstellationDict.get('Constellation').collections, ConstellationNotAutopublished) || [];
 	var collections = (autoPublishAll()) ? allCollections : ConstellationAutopublished;
-    Meteor.subscribe('Constellation_autopublish', _.filter(collections, function (collection) {
+    ConstellationDict.set('Constellation_autopublish_subscription_ready', false);
+	Meteor.subscribe('Constellation_autopublish', _.filter(collections, function (collection) {
 	  return TabStates.get(collection) && Constellation.Collection(collection) && !Constellation.collectionIsLocal(collection);
-	})); 
+	}), function () {
+	  Tracker.afterFlush(function () {
+	    ConstellationDict.set('Constellation_autopublish_subscription_ready', true);
+	  });
+	}); 
+  }
+  else {
+	ConstellationDict.set('Constellation_autopublish_subscription_ready', true);  
   }
 });
 
