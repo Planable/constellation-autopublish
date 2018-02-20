@@ -1,6 +1,6 @@
 Package.describe({
   name: 'constellation:autopublish',
-  version: '0.4.6',
+  version: '0.4.7',
   summary: 'Autopublish toggle plugin for Constellation',
   git: 'https://github.com/JackAdams/constellation-autopublish.git',
   documentation: 'README.md',
@@ -13,7 +13,7 @@ Package.onUse(function(api) {
   api.use(['templating','tracker'], 'client');
   api.use('check','server');
   api.use('underscore');
-  api.use('constellation:console@1.4.6', 'client');
+  api.use('constellation:console@1.4.7', 'client');
   api.use('dburles:mongo-collection-instances@0.3.5', 'server');
 
   api.addFiles('autopublish.html','client');
