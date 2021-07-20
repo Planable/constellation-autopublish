@@ -1,7 +1,7 @@
 // Hook in to constellation UI
 
-var Constellation = Package["constellation:console"].Constellation;
-var API = Package["constellation:console"].API
+var Constellation = Package["planable:console"].Constellation;
+var API = Package["planable:console"].API;
 
 API.addTab({
   name: 'Autopublish',
